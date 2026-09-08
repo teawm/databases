@@ -1,0 +1,1 @@
+UPDATE ord SET ord_date = '2026-09-01';
