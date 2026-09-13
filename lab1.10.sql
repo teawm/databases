@@ -1,1 +1,0 @@
-UPDATE ord SET ord_date = '2025-12-31' WHERE pnum = 1002;
