@@ -1,0 +1,76 @@
+CREATE TABLE IF NOT EXISTS prod (
+    pnum int PRIMARY KEY,
+    name varchar(20) NOT NULL,
+    weight int NOT NULL,
+    city varchar(20) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS cust (
+    cnum int PRIMARY KEY,
+    name varchar(20) NOT NULL,
+    rating int NOT NULL,
+    city varchar(20) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS sal (
+    snum int PRIMARY KEY,
+    name varchar(20) NOT NULL,
+    comm numeric(7,2) NOT NULL,
+    city varchar(20) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS ord (
+    onum int PRIMARY KEY,
+    pnum int NOT NULL,
+    cnum int NOT NULL,
+    snum int NOT NULL,
+    amt int NOT NULL,
+    FOREIGN KEY (pnum) REFERENCES prod(pnum),
+    FOREIGN KEY (cnum) REFERENCES cust(cnum),
+    FOREIGN KEY (snum) REFERENCES sal(snum)
+);
+
+INSERT INTO prod (pnum, name, weight, city) VALUES
+(1001, 'Monitor', 2000, 'Obninsk'),
+(1002, 'Keyboard', 500, 'Yekaterinburg'),
+(1003, 'Mouse', 100, 'Novosibirsk'),
+(1004, 'Printer', 1500, 'Saint Petersburg'),
+(1005, 'Hard drive', 300, 'Moscow'),
+(1006, 'Speakers', 700, 'Novosibirsk');
+
+INSERT INTO cust (cnum, name, rating, city) VALUES
+(2001, 'Ivanov', 100, 'Perm'),
+(2002, 'Petrov', 100, 'Moscow'),
+(2003, 'Vasiliev', 200, 'Yekaterinburg'),
+(2004, 'Dmitriev', 200, 'Krasnoyarsk'),
+(2005, 'Skvortcov', 300, 'Moscow'),
+(2006, 'Avdeev', 400, 'Novosibirsk'),
+(2007, 'Smirnov', 100, 'Omsk');
+
+INSERT INTO sal (snum, name, comm, city) VALUES
+(3001, 'DNS', 0.11, 'Novosibirsk'),
+(3002, 'Citylink', 0.12, 'Saint Petersburg'),
+(3003, 'MVideo', 0.15, 'Yekaterinburg'),
+(3004, 'Inline', 0.13, 'Vladivostok'),
+(3005, 'Elbrus', 0.11, 'Moscow');
+
+INSERT INTO ord (onum, pnum, cnum, snum, amt) VALUES
+(4001, 1001, 2001, 3001, 2), (4002, 1001, 2002, 3001, 1),
+(4003, 1001, 2006, 3002, 10), (4004, 1001, 2003, 3003, 5),
+(4005, 1001, 2004, 3004, 5), (4006, 1002, 2001, 3005, 7),
+(4007, 1002, 2002, 3001, 8), (4008, 1003, 2001, 3002, 3),
+(4009, 1003, 2006, 3003, 1), (4010, 1003, 2007, 3004, 9),
+(4011, 1003, 2004, 3003, 6), (4012, 1004, 2002, 3001, 6),
+(4013, 1004, 2001, 3002, 4), (4014, 1004, 2001, 3004, 4),
+(4015, 1004, 2006, 3003, 3), (4016, 1004, 2004, 3005, 3),
+(4017, 1004, 2007, 3002, 2), (4018, 1005, 2001, 3005, 1),
+(4019, 1006, 2004, 3005, 2), (4020, 1006, 2003, 3002, 3);
+
+INSERT INTO sal (snum, name, comm, city) VALUES 
+(3006, 'Astra', 0.16, 'Innopolis'),
+(3007, 'RedSoft', 0.13, 'Moscow');
+
+DELETE FROM sal WHERE snum = 3007;
+ALTER TABLE ord ADD COLUMN ord_date date;
+UPDATE ord SET ord_date = '2026-09-01';
+UPDATE ord SET ord_date = '2025-12-31' WHERE pnum = 1002;
