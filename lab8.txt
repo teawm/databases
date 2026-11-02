@@ -1,0 +1,101 @@
+
+
+
+
+P1 Task 1.
+~$ psql 
+=# CREATE DATABASE labs; 
+=# \c labs;
+=# ALTER SYSTEM SET work_mem = '8MB';
+=# SELECT pg_reload_conf();
+=# SHOW work_mem;
+
+=# SELECT name, setting FROM pg_settings WHERE name = 'work_mem';
+
+=# ALTER SYSTEM RESET work_mem;
+=# SELECT pg_reload_conf();
+=# SHOW work_mem;
+ 
+
+P1 Task 2.
+
+ - Created ddl.sql & populate.sql for "drinks".
+// Different ways to exec sql scripts:
+=# \i ddl.sql
+~$ psql -d labs -f populate.sql
+=# SELECT * FROM drinks;
+
+
+P1 Task 3.
+~$ grep "$(date +%Y-%m-%d)" /var/log/postgresql/postgresql-16-main.log | less
+
+
+
+
+P2 PreTask 0.
+=# CREATE TABLE row_test (id int PRIMARY KEY, val text);
+=# INSERT INTO row_test VALUES (1, 'one');
+
+
+P2 Task 1.
+// First test Read Committed
+1# BEGIN;
+1# SELECT * FROM row_test;
+2# DELETE FROM row_test;
+1# SELECT * FROM row_test;
+1# COMMIT;
+
+
+P2 Task 2.
+// Second test Repeatable Read
+1# BEGIN ISOLATION LEVEL REPEATABLE READ;
+1# SELECT * FROM row_test;
+2# DELETE FROM row_test;
+1# SELECT * FROM row_test; 
+1# COMMIT;
+
+
+
+
+P2 Task+ 1.
+// Third test
+1# BEGIN;
+1# CREATE TABLE tx_test (id int);
+1# INSERT INTO tx_test VALUES (1);
+2# SELECT * FROM tx_test;
+1# COMMIT;
+2# SELECT * FROM tx_test;
+
+
+P2 Task+ 2.
+// Fourth test 
+1# BEGIN;
+1# CREATE TABLE tx_test (id int);
+1# INSERT INTO tx_test VALUES (1);
+2# SELECT * FROM tx_test;
+1# ROLLBACK;
+
+
+P2 Task+ 3.
+// Fifth test
+1# BEGIN;
+1# SELECT * FROM row_test;
+2# DROP TABLE row_test;
+
+
+
+
+P3 Task 1.
+~$ ps aux | grep postgres
+
+
+P3 Task 2.
+~$ sudo pg_ctlcluster 16 main stop
+~$ sudo pg_ctlcluster 16 main start
+~$ tail -n 30 /var/log/postgresql/postgresql-16-main.log
+
+
+P3 Task 3.
+~$ sudo pg_ctlcluster 16 main stop -m immediate --skip-systemctl-redirect
+~$ sudo pg_ctlcluster 16 main start
+~$ tail -n 40 /var/log/postgresql/postgresql-16-main.log
