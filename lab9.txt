@@ -1,0 +1,51 @@
+
+
+
+
+P1 Task 1.
+ - File lab9.sql
+
+
+P1 Task 2.
+=# \dn+
+=# \dt student.*
+=# \dt app.*
+=# SELECT table_schema, table_name FROM information_schema.tables WHERE table_schema IN ('student','app');
+
+P1 Task 3.
+=# ALTER DATABASE labs SET search_path = student, app, public;
+=# \c labs
+=# SHOW search_path;  
+=# SELECT current_schemas(true);
+=# SELECT * FROM <clients/orders/products/categories>;
+
+
+
+
+P2 Task 1.
+~$ sudo mkdir -p /var/lib/postgresql/ts
+~$ sudo chown postgres:postgres /var/lib/postgresql/ts
+=# CREATE DATABASE lab9;
+=# \c lab9
+=# CREATE TABLESPACE ts LOCATION '/var/lib/postgresql/ts';
+=# CREATE TABLE t (id serial PRIMARY KEY, val text) TABLESPACE ts;
+=# INSERT INTO t (val) VALUES ('a'), ('b'), ('c');
+
+
+P2 Task 2.
+=# SELECT pg_size_pretty(pg_database_size('lab9'));
+=# SELECT pg_size_pretty(pg_table_size('t'));
+=# SELECT pg_size_pretty(pg_tablespace_size('ts'));
+=# SELECT pg_size_pretty(pg_tablespace_size('pg_default'));
+
+
+P2 Task 3.
+=# ALTER TABLE t SET TABLESPACE pg_default;
+=# SELECT pg_size_pretty(pg_tablespace_size('ts'));
+=# SELECT pg_size_pretty(pg_tablespace_size('pg_default'));
+
+
+P2 Task 4.
+=# DROP TABLESPACE ts;
+
+
