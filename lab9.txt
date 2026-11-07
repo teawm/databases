@@ -12,6 +12,7 @@ P1 Task 2.
 =# \dt app.*
 =# SELECT table_schema, table_name FROM information_schema.tables WHERE table_schema IN ('student','app');
 
+
 P1 Task 3.
 =# ALTER DATABASE labs SET search_path = student, app, public;
 =# \c labs
@@ -49,3 +50,41 @@ P2 Task 4.
 =# DROP TABLESPACE ts;
 
 
+
+
+P3 PreTask 0.
+~$ xdg-open http://localhost
+
+
+P3 Tasks 1-2.
+=# \i bookstore.sql
+
+
+P3 Task 3.
+=# \i insertbooks.sql
+=# 
+SELECT * FROM authors
+WHERE (middle_name ='');
+
+SELECT * FROM books
+WHERE title ILIKE '% % %';
+
+SELECT
+	CONCAT(
+		CONCAT_WS(' ', a.first_name, a.middle_name, a.last_name)
+	) AS author,
+	b.title AS title
+FROM authorship ats
+JOIN authors a ON ats.author_id = a.author_id
+JOIN books b ON ats.book_id = b.book_id;
+
+SELECT * FROM operations
+WHERE (book_id = 1);
+
+
+P3 Task 4.
+=# \i bookview.sql
+=# 
+SELECT * FROM catalog_v;
+SELECT * FROM authors_v;
+SELECT * FROM operations_v;

@@ -22,3 +22,15 @@ CREATE TABLE app.categories (
 	category_id serial PRIMARY KEY,
 	name text NOT NULL
 );
+
+CREATE TABLE student.drinks (
+	id serial PRIMARY KEY,
+	name text NOT NULL,
+	cost numeric(10,2)
+);
+
+CREATE TABLE app.drinks (
+	id serial PRIMARY KEY,
+	name text NOT NULL,
+	cost numeric(10,2)
+);
