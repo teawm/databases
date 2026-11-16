@@ -34,16 +34,18 @@ P2 Task 1.
 
 
 P2 Task 2.
-=# SELECT pg_size_pretty(pg_database_size('lab9'));
-=# SELECT pg_size_pretty(pg_table_size('t'));
-=# SELECT pg_size_pretty(pg_tablespace_size('ts'));
-=# SELECT pg_size_pretty(pg_tablespace_size('pg_default'));
+=# 
+SELECT pg_size_pretty(pg_database_size('lab9'));
+SELECT pg_size_pretty(pg_table_size('t'));
+SELECT pg_size_pretty(pg_tablespace_size('ts'));
+SELECT pg_size_pretty(pg_tablespace_size('pg_default'));
 
 
 P2 Task 3.
-=# ALTER TABLE t SET TABLESPACE pg_default;
-=# SELECT pg_size_pretty(pg_tablespace_size('ts'));
-=# SELECT pg_size_pretty(pg_tablespace_size('pg_default'));
+=# 
+ALTER TABLE t SET TABLESPACE pg_default;
+SELECT pg_size_pretty(pg_tablespace_size('ts'));
+SELECT pg_size_pretty(pg_tablespace_size('pg_default'));
 
 
 P2 Task 4.
