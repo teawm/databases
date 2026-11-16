@@ -1,0 +1,32 @@
+
+
+
+
+P1 Tasks 1-2.
+=#
+\i bookfunc.sql
+\i bookview.sql 
+
+ - bookview.sql updated
+
+
+
+
+P2 Tasks 1-2.
+=#
+\i bookproc.sql
+
+
+
+
+P3 Task 1.
+=#
+\i bookhand.sql
+
+
+P3 Task 2.
+=#
+\i bookview.sql
+\i bookcatalog.sql
+
+ - bookview.sql updated
