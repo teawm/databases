@@ -6,6 +6,6 @@ $$
 SELECT c.book_id, c.display_name, c.onhand_qty
 FROM catalog_v c
 WHERE (author_name IS NULL OR author_name = '' OR c.authors ILIKE '%' || author_name || '%')
-AND (book_title  IS NULL OR book_title  = '' OR c.title  ILIKE '%' || book_title  || '%')
+AND (book_title IS NULL OR book_title = '' OR c.title ILIKE '%' || book_title || '%')
 AND (in_stock IS NOT TRUE OR c.onhand_qty > 0);
 $$;

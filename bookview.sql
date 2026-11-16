@@ -10,7 +10,7 @@ SELECT b.book_id,
                           COALESCE(' ' || a.middle_name, ''),
                           ', ' ORDER BY asp.seq_num)
           FROM authorship asp JOIN authors a ON a.author_id = asp.author_id
-         WHERE asp.book_id = b.book_id) AS authors   -- ПОЛНЫЕ имена: для поиска
+         WHERE asp.book_id = b.book_id) AS authors
 FROM books b;
 
 
